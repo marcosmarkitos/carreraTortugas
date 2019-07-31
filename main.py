@@ -7,14 +7,31 @@ class Circuito():
     __colorTurtle = ('red', 'blue', 'green', 'orange')
     
     def __init__(self, width, height):  
+        self.__height = height
         self.__screen = turtle.Screen()
         self.__screen.setup(width, height)
         self.__screen.bgcolor('lightgray')
         self.__startLine = -width/2 + (5*width/100)
         self.__finishLine = width/2 - (5*width/100)
         
+        self.__dibujaLineas()
         self.__createRunners()
         
+    def __dibujaLineas(self):
+        Line_turtle = turtle.Turtle()
+        Line_turtle.shapesize (1,1000,1)
+        Line_turtle.width(2)
+        Line_turtle.penup()
+        Line_turtle.setpos (self.__startLine+15, -self.__height/2)
+        Line_turtle.pendown()
+        Line_turtle.left(90)
+        Line_turtle.fd(self.__height)
+        
+        Line_turtle.penup()
+        Line_turtle.setpos (self.__finishLine+15, -self.__height/2)
+        Line_turtle.pendown()
+        Line_turtle.fd(self.__height)
+    
     def __createRunners(self):
         for i in range (4):
             new_turtle = turtle.Turtle()
@@ -35,7 +52,7 @@ class Circuito():
                 if tortuga.position()[0] >= self.__finishLine:
                     hayGanador = True
                     print("La tortuga de color {} ha ganado.".format(tortuga.color()[0]))
-            
+                    break
 
 
 if __name__ == '__main__':
